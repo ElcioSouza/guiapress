@@ -1,0 +1,65 @@
+<%- include('../../partials/head.ejs') %>
+<%- include('../../partials/navbar.ejs') %>
+<div class="container">
+    <hr>
+    <h2>Categorias</h2>
+    <a href="/admin/categories/new" class="btn btn-success">Criar nova categoria</a>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Slug</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% categories.forEach(category => {%>
+            <tr>
+                <td><%= category.id %></td>
+                <td><%= category.title %></td>
+                <td><%= category.slug %></td>
+                <td>
+                    <a  href="/admin/categorie/edit/<%= category.id %>" class="btn btn-warning">Editar</a>
+                    <form method="post" class="delete-category" action="/categories/delete" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= category.id %>">
+                        <button class="btn btn-danger">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+            <% })%>
+
+        </tbody>
+    </table>
+</div>
+<%- include('../../partials/footer.ejs') %>
+<script>
+
+    const Events = {
+        init: function(){
+            let form_ = document.querySelector(".delete-category");
+            if(form_) {
+                form_.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    let form = this;
+                    let decision = confirm("Você deseja deletar está categoria ?");
+                    if (decision) {
+                        form.submit();
+                    } else {
+                        console.log("Não quero deletar, foi um acidente!")
+                    }
+                })
+            }
+        }
+    }
+    const App = {
+        init: function(){
+            Events.init();
+        }
+    }
+    document.addEventListener("DOMContentLoaded", function (event) {
+        App.init();
+    });
+</script>

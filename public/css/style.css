@@ -1,0 +1,19 @@
+h1 {
+    color: blue;
+}
+* {
+    text-decoration: none;
+    list-style: none;
+}
+body {
+    background-color: #eceff1;
+}
+.pergunta {
+    margin-top: 20px;
+} 
+.pergunta_form .input:nth-child(n):not(:last-child) {
+    margin-bottom:24px;
+}
+label {
+    font-weight: 600;
+}
