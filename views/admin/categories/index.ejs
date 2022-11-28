@@ -35,31 +35,3 @@
     </table>
 </div>
 <%- include('../../partials/footer.ejs') %>
-<script>
-
-    const Events = {
-        init: function(){
-            let form_ = document.querySelector(".delete-category");
-            if(form_) {
-                form_.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    let form = this;
-                    let decision = confirm("Você deseja deletar está categoria ?");
-                    if (decision) {
-                        form.submit();
-                    } else {
-                        console.log("Não quero deletar, foi um acidente!")
-                    }
-                })
-            }
-        }
-    }
-    const App = {
-        init: function(){
-            Events.init();
-        }
-    }
-    document.addEventListener("DOMContentLoaded", function (event) {
-        App.init();
-    });
-</script>
