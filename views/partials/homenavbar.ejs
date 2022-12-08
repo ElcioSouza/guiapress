@@ -9,6 +9,21 @@
                 <a class="nav-link" href="/">Home</a>
             </li>
 
+            <li>
+                <div class="d-flex">
+                    <div class="dropdown mr-1">
+                        <a class="nav-link dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                            Categoria
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                            <% categories.forEach(category => { %>
+                                <a class="dropdown-item" href="/category/<%= category.slug %>"><%= category.title %></a>
+                            <% }) %>
+                        </div>
+                    </div>
+                </div>
+            </li>
         </ul>
     </nav>
 </header>
