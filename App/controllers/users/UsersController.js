@@ -5,7 +5,9 @@ const Router = express.Router();
 
 
 Router.get("/admin/users",(req,res) => {
-    res.send("Listagem de usuários");
+    User.findAll().then(users => {
+      res.render("admin/users/index",{users});
+    });
 });
 
 Router.get("/admin/users/create",(req,res) => {
