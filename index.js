@@ -2,15 +2,25 @@ const express = require("express") // importando o framework express
 const App = express();
 const bodyParser = require("body-parser")
 const connection = require("./App/database/database");
+const session = require("express-session");
 const categoriesController = require("./App/controllers/categories/CategoriesController");
 const articlesController = require("./App/controllers/article/ArticleController");
 const UsersController = require("./App/controllers/users/UsersController");
 const Article = require("./App/models/articles/ArticleModel");
 const Category = require("./App/models/categories/CategoryModel");
 const Users = require("./App/models/users/usersModel");
+const { application } = require("express");
 
 
 App.set('view engine', 'ejs');
+
+App.use(session({
+    secret: "fijffejewfjewjefjiefujefijefwujefwujef",
+    cookie: {
+        maxAge:30000
+    }
+}))
+
 App.use(express.static("public"));
 App.use(bodyParser.urlencoded({ extended: false })) // aceita dados de formulario
 App.use(bodyParser.json())
@@ -26,6 +36,7 @@ connection
 App.use("/", categoriesController);
 App.use("/", articlesController);
 App.use("/", UsersController);
+
 
 App.get("/", (req, res) => {
     Article.findAll({

@@ -2,9 +2,10 @@ const express = require("express");
 const Router = express.Router();
 const Category = require("../../models/categories/CategoryModel");
 const Article = require("../../models/articles/ArticleModel");
+const adminAuth = require("../../middleware/adminAuth");
 const slugify = require("slugify");
 
-Router.get('/admin/articles', (req, res) => {
+Router.get('/admin/articles', adminAuth ,(req, res) => {
     // na buscar de artigo quero voce inclua a tabela categoria tambem ou seja join - include: [{model: Category}]
       Article.findAll({
          include: [{model: Category}]
